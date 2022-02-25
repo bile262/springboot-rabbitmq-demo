@@ -5,7 +5,7 @@ like routing.
 
 ## RabbitMQ
 
-this demo depends on a local or docker installation of rabbitmq available on localhost:5672 .
+this demo depends on a local installation of rabbitmq available on localhost:5672 .
 
 All rabbitmq configuration is done by the code once it is started.
 
