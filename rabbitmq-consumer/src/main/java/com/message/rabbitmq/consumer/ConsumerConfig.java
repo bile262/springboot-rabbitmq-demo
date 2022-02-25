@@ -20,17 +20,17 @@ public class ConsumerConfig {
         SimpleMessageListenerContainer listener = new SimpleMessageListenerContainer();
         listener.setConnectionFactory(connectionFactory);
         listener.setDefaultRequeueRejected(false);
-//        listener.setMessageListener(
-//            m -> {
-//                String body = new String(m.getBody());
-//
-//                //simulate an unexpected processing failure
+        listener.setMessageListener(
+            m -> {
+                String body = new String(m.getBody());
+
+                //simulate an unexpected processing failure
 //                if (body.contains("id 5")) {
 //                    throw new RuntimeException("Processing Failure!");
 //                }
-//                RabbitMQConsumer.addMessage(body);
-//            }
-//        );
+                RabbitMQConsumer.addMessage(body);
+            }
+        );
         listener.setQueueNames(TOPIC_QUEUE_1,TOPIC_QUEUE_2);
 
         return listener;
