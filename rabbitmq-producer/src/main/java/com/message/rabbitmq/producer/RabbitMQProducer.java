@@ -8,13 +8,13 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-import static com.message.rabbitmq.common.RabbitConfiguration.TEST_TOPIC;
-import static com.message.rabbitmq.common.RabbitConfiguration.TOPIC_EXCHANGE;
+import static com.message.rabbitmq.common.RabbitConfiguration.*;
 
 @Controller
 @SpringBootApplication
@@ -31,13 +31,13 @@ public class RabbitMQProducer {
     }
 
     @ResponseBody
-    @RequestMapping("/producer")
-    String producer() {
+    @PostMapping("/producer")
+    String producer(@RequestBody SimpleMessage message) {
         int id = counter.incrementAndGet();
-        SimpleMessage message = new SimpleMessage(id, "Simple Message id " + id);
+        SimpleMessage simpleMessage = new SimpleMessage(id, message.getDescription(), message.getRoutingKey());
         rabbitTemplate.setMessageConverter(new Jackson2JsonMessageConverter());
-        rabbitTemplate.convertAndSend(TOPIC_EXCHANGE, TEST_TOPIC, message);
+        rabbitTemplate.convertAndSend(TOPIC_EXCHANGE, message.getRoutingKey(), simpleMessage);
 
-        return "Mesage Produced with id: " + message.getId();
+        return "Mesage Produced sending... ";
     }
 }

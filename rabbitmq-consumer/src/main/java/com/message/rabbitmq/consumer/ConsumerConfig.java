@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import static com.message.rabbitmq.common.RabbitConfiguration.TOPIC_QUEUE;
+import static com.message.rabbitmq.common.RabbitConfiguration.*;
 
 @Configuration
 public class ConsumerConfig {
@@ -31,7 +31,7 @@ public class ConsumerConfig {
                 RabbitMQConsumer.addMessage(body);
             }
         );
-        listener.setQueueNames(TOPIC_QUEUE);
+        listener.setQueueNames(TOPIC_QUEUE_1,TOPIC_QUEUE_2);
 
         return listener;
     }
