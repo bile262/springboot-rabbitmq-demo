@@ -38,6 +38,6 @@ public class RabbitMQProducer {
         rabbitTemplate.setMessageConverter(new Jackson2JsonMessageConverter());
         rabbitTemplate.convertAndSend(TOPIC_EXCHANGE, message.getRoutingKey(), simpleMessage);
 
-        return "Mesage Produced sending... ";
+        return "Message Produced sending... ";
     }
 }

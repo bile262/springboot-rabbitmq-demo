@@ -23,11 +23,6 @@ public class ConsumerConfig {
         listener.setMessageListener(
             m -> {
                 String body = new String(m.getBody());
-
-                //simulate an unexpected processing failure
-//                if (body.contains("id 5")) {
-//                    throw new RuntimeException("Processing Failure!");
-//                }
                 RabbitMQConsumer.addMessage(body);
             }
         );
