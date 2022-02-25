@@ -1,12 +1,11 @@
 # Spring boot RabbitMQ Producer/Consumer Demo
 
 Demo project for producer/consumer with spring boot and rabbitmq covering basic communication and also some common patterns 
-like routing, TTL and dead letter queue.
+like routing.
 
 ## RabbitMQ
 
-this demo depends on a local or docker installation of rabbitmq available on localhost:5672 .  
-suggested: https://hub.docker.com/_/rabbitmq/
+this demo depends on a local or docker installation of rabbitmq available on localhost:5672 .
 
 All rabbitmq configuration is done by the code once it is started.
 
@@ -24,7 +23,4 @@ Once they are running you can use:
 
 Each produced message will be sent to a exchange that routes them towards two queues:  
 * topic.queue: a topic queue where the messages will be available for the consumer
-* ttl.queue: a TTL queue, where the message are suppose to go to a Dead letter queue after
-30s.
 
-The message with ID 5 will fail and will also be sent to the Dead letter queue.
